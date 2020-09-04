@@ -9,6 +9,10 @@ defaults:
     values:
       layout: "default"
       
+collections:
+  notes: 
+    output: true
+      
 title: Your awesome title
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
