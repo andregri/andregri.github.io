@@ -78,3 +78,19 @@ tags: opengl
 - GLSL includes a special input to the vertex shader called **gl_VertexID**, which is the index of the vertex that is being processed at the time. The gl_VertexID input starts counting from the value given by the <code class="glsl hljs inline">first</code> parameter of glDrawArrays() and counts upward one vertex at a time for <code class="glsl hljs inline">count</code> vertices (the third parameter of glDrawArrays()).
 
 - We can use gl_VertexID to assign a different position to each vertex
+
+## Chapter 3 - The OpenGL pipeline
+
+- In GLSL, the mechanism for getting data in and out of shaders is to declare global variables with the <code class="glsl hljs inline">in</code> and <code class="glsl hljs inline">out</code> storage qualifiers. <code class="glsl hljs inline">in</code> and <code class="glsl hljs inline">out</code> can be used to form **conduits** from shader to shader and pass data between them. Anything you write to an output variable in one shader is sent to a similarly named variable declared with the in keyword in the subsequent stage.
+
+- Reading and writing **built-in variables** such as gl_VertexID and gl_Position allow to communicate with fixed-function blocks.
+
+1. The **vertex fetching** or **vertex pulling** is the first stage and it is a fixed-function stage. Provides inputs to the vertex shader.
+
+2. The **vertex shader** is the first programmable stage in the OpenGL pipeline. We use the <code class="glsl hljs inline">in</code> keyword to bring inputs into the vertex shader. It is automatically filled in by the fixed-function vertex fetch stage. The variable becomes known as a **vertex attribute**.
+
+- We can tell vertex fetch stage what to fill the variable with by using one of the many variants of the vertex attribute functions, **glVertexAttrib_(GLuint index, _)**.
+
+- In the vertex shader, <code class="glsl hljs inline">layout (location = 0) in vec4 offset;</code> is an input to the vertex shader. This is a **layout qualifier**, which we have used to set the location of the vertex attribute to zero. This location is the value we’ll pass in <code class="glsl hljs inline">index</code> to refer to the attribute.
+
+- Each time we call one of the glVertexAttrib*() functions (of which there are many), it will update the value of the vertex attribute that is passed to the vertex shader.
