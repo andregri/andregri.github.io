@@ -31,3 +31,50 @@ tags: opengl
 	1. The first part, often known as the **front end**, processes vertices and primitives, eventually forming them into the points, lines, and triangles that will be handed off to the rasterizer. This is known as **primitive assembly**. After going through the rasterizer, the geometry has been converted from what is essentially a **vector representation** into a large number of independent **pixels**.
 	
 	2.  Pixels are handed off by the **back end**, which includes depth and stencil testing, fragment shading, blending, and updating of the output image.
+	
+## Chapter 2
+
+- OpenGL works by connecting a number of mini-programs called **shaders** together with **fixed-function glue**. Usually, the output of the graphic pipeline is pixels.
+
+- OpenGL shaders are written in a language called the **OpenGL Shading Language**, or **GLSL**. It is similar to C.
+
+- The source code for your shader is placed into a **shader object** and **compiled**, and then multiple shader objects can be **linked** together to form a **program object**.
+
+	shader source -> shader object -> compiler -> linker -> program object
+
+- Each program object can contain shaders for one or more shader stages:
+
+  - vertex shaders
+  - tessellation control
+  - evaluation shaders
+  - geometry shaders
+  - fragment shaders
+  - compute shaders
+  
+- The minimal pipeline consists of only a **vertex shader** (or a compute shader) but if you wish to see any pixels on the screen, you also need a **fragment shader**.
+
+- <code class="glsl hljs inline">#version 450 core</code> tells the shader compiler that we intend to use version 4.5 of the shading language. The keyword <code class="glsl hljs inline">core</code> to indicate that we intend to use only features from the core profile of OpenGL.
+
+- the declaration of our <code class="glsl hljs inline">main</code> function, which is where the shader starts executing. Pay attention: it must return void!
+
+- All variables that start with **gl_** are part of OpenGL and connect shaders to each other or to the various parts of fixed functionality in OpenGL.
+
+- In the vertex shader, **gl_Position** represents the output position of the vertex in the OpenGL’s **clip space**, which is the coordinate system expected by the next stage of the OpenGL pipeline. gl_Position is a built-in variables provided by GLSL.
+
+- In fragment shaders, the value of **output variables** will be sent to the window or screen.
+
+- Create a **vertex array object (VAO)**, which is an object that represents the **vertex fetch stage** of the OpenGL pipeline and is used to supply input to the vertex shader.
+
+- To create the VAO, we call the OpenGL function **glCreateVertexArrays()**; to attach it to our context, we call **glBindVertexArray()**.
+
+1. Most things in OpenGL are represented by objects (like vertex array objects) and we create them using a **creation function**.
+
+2. Then let OpenGL know that we want to use them by binding them to the context using a **binding function**.
+
+- **glUseProgram()** to tell OpenGL to use our program object for rendering.
+
+- The **glDrawArrays()** function sends vertices into the OpenGL pipeline. For each vertex, the vertex shader is executed. The <code class="glsl hljs inline">mode</code> parameter, which tells OpenGL what type of graphics primitive we want to render.
+
+- GLSL includes a special input to the vertex shader called **gl_VertexID**, which is the index of the vertex that is being processed at the time. The gl_VertexID input starts counting from the value given by the <code class="glsl hljs inline">first</code> parameter of glDrawArrays() and counts upward one vertex at a time for <code class="glsl hljs inline">count</code> vertices (the third parameter of glDrawArrays()).
+
+- We can use gl_VertexID to assign a different position to each vertex
