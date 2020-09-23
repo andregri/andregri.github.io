@@ -220,3 +220,156 @@ tags: opengl
 - **Extensions** are listed in the OpenGL extension registry on the OpenGL Web site.
 
 - There are three major classifications of extensions: vendor (written by 1 vendor like AMD or NV), EXT (wirtten by 2 or more vendors), and ARB (official part of OpenGL).
+
+## Chapter 4 - Maths for 3D Graphics
+
+- The **dot product** between vectors is useful to get the angle between the two vectors. It is used extensively during **lighting** calculations between the surface normal and the vector pointing toward a light source in diffuse light calculations.
+
+- The **cross product** is used in many applications from finding the surface normals of triangles to constructing transformation matrices.
+
+- By default, OpenGL uses a **column-major** or a **column-primary** layout from matrices: the first four elements represent the first column of the matrix, the next four elements represent the second column, and so on.
+
+- In memory, **GLfloat matrix[16];** has a column-major matrix ordering.
+
+- In memory, **GLfloat matrix[4][4];** is laid out in a row-major order.
+
+- In 4x4 matrix, notice that the last row of the matrix is all 0s with the exception of the very last element, which is 1. The upper-left 3 × 3 sub-matrix of the matrix shown in Figure 4.5 represents a **rotation or orientation**. The last column of the matrix represents a **translation or position**.
+
+- Any position in space and any desired orientation can be uniquely defined by a 4 × 4 matrix.
+
+- If you multiply a vertex expressed in the identity coordinate system (written as a column matrix or vector) by this matrix, the result is a new vertex that has been transformed to the new coordinate system.
+
+- Matrix multiplication is **associative**: A * (B * v) = (A * B) * v. It is possible to stack a whole bunch of transforms together by multiplying the matrices that represent those transforms and using the resulting matrix as a single term in the final product.
+
+- **Projection**: is the process of squishing 3D data down into 2D data. The projection is the type of transformation (orthographic or perspective) that occurs during vertex processing.
+
+1. Most of your vertex data will typically begin life in **object space**, which is also commonly known as **model space**. The positions of vertices are interpreted relative to a local origin.
+
+2. The **world space** is where coordinates are stored relative to a fixed, global origin. Once in world space, all objects exist in a common frame. Often, this is the space in which lighting and physics calculations are performed.
+
+3. **View or eye or camera coordinates** are relative to the position of the observer (hence the terms “camera” and “eye”) regardless of any transformations that may occur; eye coordinates represent a virtual fixed coordinate system that is used as a common frame of reference.
+
+- Positive x and y are pointed right and up, respectively, from the viewer’s perspective. Positive z travels away from the origin toward the user, and negative z values travel farther away from the viewpoint into the screen. The screen lies at the z coordinate 0.
+
+4. **Clip space** is always a four-dimensional homogenous coordinate. Upon exiting clip space, all four of the vertex’s components are divided through by the w component. The result of the division is considered to be in **normalized device coordinate space (NDC space)**.
+
+- This allows for effects such as perspective foreshortening and projection.
+
+- When your vertex shader writes to gl_Position, this coordinate is considered to be in clip space.
+
+- A summary of the coordinate spaces used in 3D graphics:
+
+	- **Model space** or **object space**: positions relative to a local origin.
+	- **World space**: positions relative to a global origin.
+	- **View or Camera or Eye space**: positions relative to the viewer.
+	- **Clip space**: positions of vertices after projection into a nonlinear homogeneous coordinate.
+	- **Normalized device coordinate (NDC) space**: Vertex coordinates are said to be in NDC after their clip space coordinates have been divided by their own w component.
+	- **Window space**: Positions of vertices in pixels, relative to the origin of the window.
+
+- Coordinate transform are: **translatio**, **rotation**, and **scaling**.
+
+- A **translation matrix** moves the vertices along one or more of the three axes. The translation amount tx, ty, tz along each of the axes, are the first three elements of the last column.
+
+- **Position vectors** are almost always encoded using four components with w (the last) being 1.0.
+
+- **Direction vectors** are encoded either simply using three components, or as four components with w being zero. Thus, multiplying a four-component direction vector by a translation matrix doesn’t change it at all.
+
+- The form of a **rotation matrix** depends on the axis about which we wish to rotate. It is possible to multiply these three matrices together to produce a composite transform matrix in order to rotate by a given amount around each of the three axes.
+
+- **Euler angles** are a set of three angles3 that represent orientation in space. Each angle represents a rotation around one of three orthogonal vectors that define our frame. However, Euler angles also come with a serious pitfall, the **gimbal lock**: when a rotation by one angle reorients one of the axes to be aligned with another of the axes, removing a degree of freedom from the system.
+
+- Multiplying by a sequence of matrices can apply a **sequence of transformations**. Order is important: you should always multiply a matrix by a vector and read the sequence of transformations in **reverse order**.
+
+- A **quaternion** is a four-dimensional quantity that is similar in some ways to a complex number: it has a real part and **three imaginary parts (i, j, and k)**.
+
+- q = (x + yi + zj + wk)
+
+- i^2 = j^2 = k^2 = ikj = −1
+
+- The product of any two of i, j, and k gives whichever one was not part of that product. Example: i = jk.
+
+- A rotation around an axis can be represented by a quaternion where the real part is the angle and axis is the imaginary or the vector part. A sequence of rotations can be represented by a series of quaternions multiplied together.
+
+- If you multiply matrices representing rotations around the Cartesian axes and you gimbal lock can occur, using quaternions, gimbal lock cannot occur.
+
+- The **model-view transform** transforms from model space (relative to the object's origin) to view space (relative to the viewer). This process establishes the **vantage point / viewpoint** of the scene.
+
+- By **default, the point of observation in a perspective projection** is at the origin (0,0,0) looking down the negative z axis (into the monitor or screen). In a perspective projection, objects drawn with positive z values are behind the observer.
+
+- In an orthographic projection, however, the viewer is assumed to be infinitely far away on the positive z axis and can see everything within the viewing volume.
+
+- The **model-world transform** transforms the positions in model space to positions in world space.
+
+- Determining the viewing transformation is like placing and pointing a camera at the scene.
+
+- The transform that moves coordinates from world space to view space is sometimes called the **world–view transform**.
+
+- Concatenating the model–world and world–view transform matrices by multiplying them together yields the model–view matrix.
+
+- Using a single composite transform to move the model into view space is more efficient than moving it first into world space and then into view space.
+
+- The second advantage has more to do with the numerical accuracy of single-precision floating-point numbers: in world space, precision depends on how far the vertices are from the world origin; in view space, then precision is dependent on how far vertices are from the viewer.
+
+- The **lookat matrix** represents a rotation that will point a camera in the correct direction and a translation that will move the origin to the center of the camera.
+
+- The **forward vector** is a vector that represents the direction of view from the camera to the point of interest.
+
+- The **sideways vector** is orthogonal (compute the cross product) to the forward vector and the **up vector** (indicating the upward direction from the camera).
+
+- The **up vector** is obtained taking the cross product of the forward vector and our sideways vector to produce a third that is orthogonal to both and that represents up with respect to the camera.
+
+- These three vectors are of unit length and are all orthogonal to one another. Given these three vectors, we can construct a rotation matrix.
+
+- To transform objects into the camera’s frame, not only do we need to orient everything correctly, but we also need to move the origin to the position of the camera. We do this by simply translating the resulting vectors by the negative of the camera’s position.
+
+- So to build the lookat matrix we need the eye position, the center position and the up direction.
+
+- The **projection transformation** is applied to your vertices after the model–view transformation: defines the viewing volume and establishes clipping planes.
+
+- The **clipping planes** are plane equations in 3D space that OpenGL uses to determine whether geometry can be seen by the viewer.
+
+- More specifically, the projection transformation specifies how a finished scene (after all the modeling is done) is projected to the final image on the screen.
+
+- In an **orthographic, or parallel, projection**, lines and polygons are mapped directly to the 2D screen using parallel lines. It means no matter how far away something is, it is still drawn the same size, just flattened against the screen.
+
+- Orthographic projections are used most often for 2D drawing purposes where you want an exact correspondence between pixels and drawing units. You also can use an orthographic projection for 3D renderings when the depth of the rendering has a very small depth in comparison to the distance from the viewpoint.
+
+- A **perspective projection** shows scenes more as they appear in real life. **Foreshortening** makes distant objects appear smaller than nearby objects of the same size. Lines in 3D space that might be parallel do not always appear parallel to the viewer; they appear to converge at some distant point.
+
+- Perspective projections are used for rendering scenes that contain wide-open spaces or objects that need to have foreshortening applied. For the most part, perspective projections are typical for 3D graphics.
+
+- Once your vertices are in view space, we need to get them into clip space, which we do by applying our projection matrix.
+
+- A commonly used **perspective matrix** is a **frustum matrix**, that produces a perspective projection such that clip space takes the shape of a rectangular frustum, which is a **truncated rectangular pyramid**.
+
+- Its parameters are the distance to the near and far planes and the world-space coordinate of the left, right, top, and bottom clipping planes.
+
+- Another common method for constructing a perspective matrix is to directly specify a field of view as an angle (in degrees, perhaps), an aspect ratio (generally derived by dividing the window’s width by its height), and the view-space positions of the near and far planes. It produces only symmetric frustra.
+
+- An **orthographic projection matrix** is simply a scaling matrix that linearly maps view-space coordinates into clip-space coordinates.
+
+- The parameters to construct the orthographic projection matrix are the left, right, top, and bottom coordinates in view space of the bounds of the scene, and the position of the near and far planes.
+
+- **Linear interpolation** can be applied to scalar values; two-dimensional values such as points on a graph; three-dimensional values such as coordinates in 3D space, colors, and so on; or even higher-dimension quantities such as matrices. Usually it is applied to angles, positions, and other coordinates.
+
+- GLSL includes a built-in function specifically for this purpose: **vec4 mix(vec4 A, vec4 B, float t);**
+
+- A **curve** can be represented by three or more **control points**. For most curves, there are more than three control points, two of which form the **endpoints**;
+
+- The **quadratic Bézier curve** (3 control points) or the **cubic Bézier curve** (4 control points) can be implemented very easily in GLSL using the mix function.
+
+- The cubic Bézier curve includes the quadratic one so that it can be reused.
+
+- Now that we see this pattern, we can take it further and produce even higher-order curves. For example, a **quintic Bézier curve** (one with five control points).
+
+- In practice, curves with more than four control points are not commonly used. Rather, we use **splines**.
+
+- A spline is effectively a long curve made up of several smaller curves (such as Béziers) that locally define their shape. One or more of the interior control points are either shared or linked in some way between adjacent segments. Any number of curves can be joined together in this way, allowing arbitrarily long paths to be formed.
+
+- A **cubic Bézier spline** is constructed from a sequence of cubic Bézier curves. This is also known as a **cubic B-spline**.
+
+- Bézier curve segments are both C^1 (continuous first derivative) and C^2 (continuous second derivative) continuous.
+
+- To ensure that we maintain continuity over the welds of a spline, we need to ensure that each segment starts off where the previous ended in terms of position, direction of movement, and rate of change.
+
+- A cubic B-spline represented this way (as a set of weld positions and velocities) is known as a **cubic Hermite spline**, or sometimes simply a cspline. 
