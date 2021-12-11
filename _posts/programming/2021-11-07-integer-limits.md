@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 author: andrea
 tags: go int limits
 ---
@@ -10,7 +10,7 @@ Integer limits and Golang specification for constant expressions
 
 Go provides all the maximum values for integer types inside the [**math** package](https://pkg.go.dev/math#pkg-constants)
 
-<pre><code class="go hljs">
+```go
 const (
 	MaxInt    = 1<<(intSize-1) - 1
 	MinInt    = -1 << (intSize - 1)
@@ -28,7 +28,7 @@ const (
 	MaxUint32 = 1<<32 - 1
 	MaxUint64 = 1<<64 - 1
 )
-</code></pre>
+```
 
 For instance, to obtain the biggest 64-bit unsigned integer, first we compute the number immediately greater than <code class="go hljs inline">MaxUint64</code> with the expression <code class="go hljs inline">1<<64</code> (that is a 65-bit number), then we decrease it by 1.
 

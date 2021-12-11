@@ -372,4 +372,48 @@ tags: opengl
 
 - To ensure that we maintain continuity over the welds of a spline, we need to ensure that each segment starts off where the previous ended in terms of position, direction of movement, and rate of change.
 
-- A cubic B-spline represented this way (as a set of weld positions and velocities) is known as a **cubic Hermite spline**, or sometimes simply a cspline. 
+- A cubic B-spline represented this way (as a set of weld positions and velocities) is known as a **cubic Hermite spline**, or sometimes simply a cspline.
+
+# Chapter 5 - Data
+
+- In OpenGL, buffers are **linear allocations of memory**, which are identified by *names* (opaque handles).
+
+- The memory allocated for a buffer object is called its **data store**.
+
+- Once you have the name of a buffer, you can attach it to the OpenGL context by **binding** it to a **buffer binding point**, sometimes referred to as **targets** (but sometimes a single target may have multiple binding points).
+
+- For example, you can use the contents of a buffer to automatically supply the inputs of a vertex shader, to store the values of variables that will be used by your shaders, or as a place for shaders to store the data they produce.
+
+- Using the **GL_ARRAY_BUFFER** target to refer to the buffer object suggests to OpenGL that we’re planning to use this buffer to store vertex data
+
+- Before you can ask OpenGL to allocate memory, you need to create a **buffer object**, represented by a GLuint variable, which is generally called its name. Buffer objects can be created using the **glCreateBuffers()**.
+
+- You can bind the buffer objects to the current OpenGL context by calling **glBindBuffer()**.
+
+- The functions that are used to allocate memory using a buffer object are **glBufferStorage()** and **glNamedBufferStorage()**. The first function affects the buffer object bound to the binding point specified by target; the second function directly affects the buffer specified by buffer.
+
+- Once storage has been allocated for a buffer object, it cannot be reallocated or respecified, but is considered **immutable**. To be clear, the contents of the buffer object’s data store can be changed, but its size or usage flags may not. If you need to resize a buffer, you need to delete it, create a new one, and set up new storage for that.
+
+- **GL_DYNAMIC_STORAGE_BIT** flag is used to tell OpenGL that you mean to update the contents of the buffer directly. If this flag is not set, OpenGL will assume that you’re not likely to need to change the contents of the buffer and might put the data somewhere that is less accessible. If you set this flag, you are able to use **glBufferSubData()** to update the buffer content.
+
+- The mapping flags **GL_MAP_READ_BIT**, **GL_MAP_WRITE_BIT**, **GL_MAP_PERSISTENT_BIT**, and **GL_MAP_COHERENT_BIT** tell OpenGL if and how you’re planning to map the buffer’s data store. **Mapping** is the process of getting a pointer that you can use from your application that represents the underlying data store of the buffer.
+
+- For example, you may map the buffer for read or write access only if you specify the GL_MAP_READ_BIT or GL_MAP_WRITE_BIT flags, respectively, or both.
+
+- If you specify **GL_MAP_PERSISTENT_BIT**, then this flag tells OpenGL that you wish to map the buffer and then leave it mapped while you call other drawing comands.
+
+- **GL_MAP_COHERENT_BIT**, goes further and tells OpenGL that you want to be able to share data quite tightly with the GPU.
+
+- Another way get data into a buffer is to give the buffer to OpenGL and tell it to copy data there. This allows you to dynamically update the content of a buffer after it has already been initialized. To do this, we call either **glBufferSubData()** or **glNamedBufferSubData()**. But to use them, you must have told OpenGL that you want to put data into it that way with the flag GL_DYNAMIC_STORAGE_BIT.
+
+- Another method for getting data into a buffer object is to ask OpenGL for a pointer to the memory that the buffer object represents using the **glMapNamedBuffer()** function and then copy the data there yourself. This is known as mapping the buffer.
+
+- As with many other buffer functions in OpenGL, there are two versions: one that affects the buffer bound to one of the targets of the current context, and one that operates directly on a buffer whose name you specify: **glMapBuffer()** and **glMapNamedBuffer()**.
+
+- To unmap the buffer, we call either **glUnmapBuffer()** or **glUnmapNamedBuffer()**.
+
+- Mapping a buffer is useful if you don’t have all the data handy when you call the function.
+
+- If you wanted to use glBufferSubData() (or the initial pointer passed to glBufferData()), you’d have to generate or read the data into temporary memory and then get OpenGL to make another copy of the data into the buffer object. If you map a buffer, you can simply read the contents of the file directly into the mapped buffer.
+
+- The glMapBuffer() and glMapNamedBuffer() functions map the entire buffer, and do not provide any information about the type of mapping operation. A more surgical approach can be taken by calling either **glMapBufferRange()** or **glMapNamedBufferRange()**.
