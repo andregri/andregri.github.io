@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: single
 author: andrea
 tags: go int limits
 ---
