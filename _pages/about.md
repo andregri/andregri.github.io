@@ -1,6 +1,7 @@
 ---
-layout: default
-title: About
+permalink: /about/
+title: "About"
+toc: true
 ---
 # Who I am
 
