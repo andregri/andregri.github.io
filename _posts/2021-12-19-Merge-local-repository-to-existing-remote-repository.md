@@ -1,13 +1,12 @@
 ---
 layout: single
 author: andrea
+title: Merging a local repository to an existing remote repository
 tags: git
 ---
 
-# 🪄 Merge local repository to existing remote repository
-
 Very often happens that I start versioning some software locally and I push it remotely
-later. When I decide it is the moment to keep the code safe and sound on Github,
+later :octocat:. When I decide it is the moment to keep the code safe and sound on Github,
 the procedure to merge a local-only repository to a fresh remote repository is not straight forward.
 
 First we set the **remote** repository that we want to connect to
@@ -21,7 +20,7 @@ git pull
 ```
 
 If we print the commit graph, the local commit and the remote commit are disconnected.
-Usually, commits beloning to the same branch or that stem from a branch are visually connected
+Usually, commits belonging to the same branch or that stem from a branch are visually connected
 with bars, dash and slash. This is not the case:
 ```
 git log --all --graph
@@ -29,13 +28,13 @@ git log --all --graph
 * commit 7bf303dcffd009abed812cf57277f4abb57c4f1f (HEAD -> master)
   Author: andregri
   Date:   Sun Dec 19 17:30:47 2021 +0100
-  
+
       git init
-  
+
 * commit 94ee685f2a585a7a981fd9b6b7439e8ea447a415 (main, origin/main)
   Author: andregri
   Date:   Sun Dec 19 17:21:51 2021 +0100
-  
+
       Initial commit
 
 ```
@@ -52,13 +51,13 @@ git log --all --graph
 * commit 7bf303dcffd009abed812cf57277f4abb57c4f1f (HEAD -> master)
 | Author: andregri
 | Date:   Sun Dec 19 17:30:47 2021 +0100
-| 
+|
 |     git init
-| 
+|
 * commit 94ee685f2a585a7a981fd9b6b7439e8ea447a415 (main, origin/main)
   Author: andregri
   Date:   Sun Dec 19 17:21:51 2021 +0100
-  
+
       Initial commit
 ```
 

@@ -1,10 +1,9 @@
 ---
 layout: single
 author: andrea
+title: Where to implement C++ function templates
 tags: cpp template generics
 ---
-
-# Where defining C++ function templates?
 
 I was implementing a **template function** inside a class. As usual, I wrote the
 prototype in .h file and the definition in a .cpp file. This templated method
