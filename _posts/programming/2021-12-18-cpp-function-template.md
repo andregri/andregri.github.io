@@ -1,6 +1,5 @@
 ---
 layout: single
-author: andrea
 title: Where to implement C++ function templates
 tags: cpp template generics
 ---

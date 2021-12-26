@@ -1,6 +1,5 @@
 ---
 layout: single
-author: andrea
 title: Merging a local repository to an existing remote repository
 tags: git
 ---
