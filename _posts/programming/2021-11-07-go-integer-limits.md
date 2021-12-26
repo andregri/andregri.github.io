@@ -2,6 +2,7 @@
 layout: single
 author: andrea
 title: Computing integer limits in Golang
+toc: true
 tags: go int limits
 ---
 
