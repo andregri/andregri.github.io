@@ -98,4 +98,4 @@ To configure the Azure App Service I needed to set the following options:
 - Continuous Deployment: On
 
 The overall diagram of the cicd pipeline is:
-![pipeline](https://ibb.co/ft4tSd3) 
+[![EhcwCJ.md.png](https://iili.io/EhcwCJ.md.png)](https://freeimage.host/i/EhcwCJ)
