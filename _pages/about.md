@@ -5,12 +5,18 @@ toc: true
 ---
 # Who I am
 
-I am a non-stop learner looking for constant innovation.
-I can’t stand still, I am always looking for new challenges.
-I am a _techaholic_, interested in new and disruptive technologies such as p2p
-networking, blockchains, cloud computing, and devops.
+I am an engineer with a background in telecommunications, digital signal
+processing, and remote sensing image analysis.
 
-I like developing in C++, Go and Python.
+My interests span from backend, cloud, DevOps to remote sensing, deep learning.
 
-Avid book reader and podcast listener.
-Open source lover and defender. Best way to reach me? Github.
+My favorite tools are Linux, Python, Golang, git and GitHub, Docker, Kubernetes
+and AWS. Of course, I am am open-source lover and defender.
+
+Outside of work, I often take part to Hackathons. Rarely I do CTFs to practice
+security skills.
+
+I am an avid podcast listener and a chess player.
+You can challenge me at [chess.com](https://www.chess.com/member/robogri) or 
+at [lichess.org](https://lichess.org/@/andregri). I prefer longer time limits
+per move rather than bullet chess.
