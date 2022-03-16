@@ -130,7 +130,7 @@ author:
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/andrea-grillo-3b439b1a9/"
     - label: "DevTo"
-      icon: "fa-brands fa-dev"
+      icon: "fab fa-fw fa-dev"
       url: "https://dev.to/andreagrillo96"
 
 # Site Footer
@@ -158,7 +158,7 @@ footer:
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/andrea-grillo-3b439b1a9/"
     - label: "DEV"
-      icon: "fa-brands fa-dev"
+      icon: "fab fa-fw fa-dev"
       url: "https://dev.to/andreagrillo96"
 
 
