@@ -10,6 +10,6 @@ jobs:
       uses: andregri/BlogOps@v1
       with:
         posts_dir: './_posts/'
-        repo_name: "BlogOps"
+        repo_name: "andregri.github.io"
         gh_access_token: ${{ secrets.GH_ACCESS_TOKEN }}
         medium_integration_token: ${{ secrets.MEDIUM_INTEGRATION_TOKEN }}
