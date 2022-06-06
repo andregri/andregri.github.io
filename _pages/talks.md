@@ -10,7 +10,9 @@ toc: true
   overflow: hidden;
   width: 100%;
   padding-top: 56.25%;">
- <iframe src="https://speakerdeck.com/player/e1caf98514c24d109ff381e265892326" style="position: absolute;
+ <iframe src="https://speakerdeck.com/player/e1caf98514c24d109ff381e265892326"
+ title="Usare Python e Github Actions per automatizzare il tuo blog" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" data-ratio="1.78343949044586" frameborder="0"
+ style="position: absolute;
  border: 0px; background-color: rgba(0, 0, 0, 0.1); margin: 0px; padding: 0px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; -webkit-background-clip: padding-box; -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px;
   top: 0;
   left: 0;
