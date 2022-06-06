@@ -4,6 +4,8 @@ main:
     url: /
   - title: "About"
     url: /about/
+  - title: "Talks"
+    url: /talks/
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"
