@@ -62,6 +62,15 @@ layout: default
     {% if jekyll.environment == 'production' and site.comments.provider and page.comments %}
       {% include comments.html %}
     {% endif %}
+    
+    <script src="https://utteranc.es/client.js"
+        repo="andregri/andregri.github.io"
+        issue-term="pathname"
+        label="PostComment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
   </article>
 
   {% comment %}<!-- only show related on a post page when `related: true` -->{% endcomment %}
