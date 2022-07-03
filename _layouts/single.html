@@ -63,6 +63,9 @@ layout: default
       {% include comments.html %}
     {% endif %}
     
+  </article>
+  
+  <div>
     <script src="https://utteranc.es/client.js"
         repo="andregri/andregri.github.io"
         issue-term="pathname"
@@ -71,7 +74,7 @@ layout: default
         crossorigin="anonymous"
         async>
     </script>
-  </article>
+  </div>
 
   {% comment %}<!-- only show related on a post page when `related: true` -->{% endcomment %}
   {% if page.id and page.related and site.related_posts.size > 0 %}
