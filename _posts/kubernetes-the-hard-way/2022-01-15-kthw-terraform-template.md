@@ -1,6 +1,6 @@
 ---
 layout: single
-title: [Kubernetes The Hard Way] Write files from templates with Terraform
+title: Kubernetes The Hard Way - Write Ansible inventory from template with Terraform
 tags: kthw terraform
 ---
 
