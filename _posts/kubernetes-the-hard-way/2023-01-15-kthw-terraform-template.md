@@ -8,7 +8,7 @@ Once the instances are provisioned to AWS using a Terraform script, I need to co
 
 Terraform provider **local** allows to write files locally provided the file path and the file content. The file path is `ansible/inventory`. The file content can be generated at run time using a template that contains some variables. So I created the file `iac/templates/inventory.tftpl`.
 
-```
+```ini
 [controllers]
 controller-0    ansible_host=${controller-0-public-ip}    private_ip=${controller-0-private-ip}     private_dns=${controller-0-private-dns}
 controller-1    ansible_host=${controller-1-public-ip}    private_ip=${controller-1-private-ip}     private_dns=${controller-1-private-dns}
@@ -30,7 +30,7 @@ ansible_ssh_private_key_file=${ssh-private-key}
 
 The variables are filled with the values of the resources in the Terraform configuration using the function `templatefile` that takes two arguments: the template file path and a dictionary with the values to be assigned to the variables.
 
-```
+```tf
 resource "local_file" "inventory" {
   content  = templatefile(
     "${path.module}/templates/inventory.tftpl",
