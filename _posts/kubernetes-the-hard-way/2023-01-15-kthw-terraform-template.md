@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Kubernetes The Hard Way - Write Ansible inventory from template with Terraform
-tags: kthw terraform
+tags: terraform
 ---
 
 Once the instances are provisioned to AWS using a Terraform script, I need to configure them using Ansible. To tell Ansible the remote targets to configure, I wrote an **inventory** file that lists the IP addresses and the hostnames. Each time I created the AWS sandbox, the IP addresses changed and I needed to copy-paste them on the inventory file. Since this list was growing too fast, I opted for using a template and letting Terraform do this job.

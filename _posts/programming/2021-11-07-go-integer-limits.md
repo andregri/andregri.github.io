@@ -2,7 +2,7 @@
 layout: single
 title: Computing integer limits in Golang
 toc: true
-tags: go int limits
+tags: go
 ---
 
 Integer limits and Golang specification for constant expressions

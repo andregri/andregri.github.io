@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Pipeline to deploy Azure App Service
+title: Github ci/cd pipeline to deploy Azure App Service
 tags: azure github
 ---
 

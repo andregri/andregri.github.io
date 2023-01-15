@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Inspecting HTTP Cache-Control
-tags: http httpd
+tags: aws httpd
 ---
 
 I was following the ACloudGuru tutorial to setup a web server with httpd on a EC2 instance and a AWS Cognito Identity Pool. 

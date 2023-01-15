@@ -1,7 +1,7 @@
 ---
 layout: single
-title: Host a web application with AWS S3 and EC2
-tags: aws S3 EC2 cors
+title: Host a Go Gin web application with AWS S3 and EC2
+tags: aws cors
 ---
 
 Few months ago I wrote a REST API service with Go and the

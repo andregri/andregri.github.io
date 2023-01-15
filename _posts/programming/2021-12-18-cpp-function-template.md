@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Where to implement C++ function templates
-tags: cpp template generics
+tags: cpp
 ---
 
 I was implementing a **template function** inside a class. As usual, I wrote the
