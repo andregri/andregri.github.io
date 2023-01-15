@@ -53,3 +53,5 @@ resource "local_file" "inventory" {
   filename = "${path.module}/../ansible/inventory"
 }
 ```
+
+Github repository [commit](https://github.com/andregri/ansible-terraform-kubernetes-cluster/tree/0423db4af524d34853556ab5b588f1992fe6f0cd) here!
