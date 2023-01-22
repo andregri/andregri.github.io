@@ -1,5 +1,7 @@
 <meta charset="utf-8">
 
+{% include analytics.html %}
+
 {% include seo.html %}
 
 {% unless site.atom_feed.hide %}
@@ -23,5 +25,3 @@
     <script src="{{ script | relative_url }}"></script>
   {% endfor %}
 {% endif %}
-
-{% include analytics.html %}
