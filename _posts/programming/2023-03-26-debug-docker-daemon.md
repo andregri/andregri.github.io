@@ -4,6 +4,8 @@ title: Debug docker daemon - docker container ls vs docker system df
 tags: docker go
 ---
 
+This post is a report of my troubleshooting process of docker daemon.
+
 # Problem
 
 I disabled Kubernetes from Docker desktop.
