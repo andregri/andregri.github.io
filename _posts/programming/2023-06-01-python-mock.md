@@ -55,7 +55,7 @@ def complex_tool():
   ...
 ```
 
-Then you create **test_script.py** to test get_namespaces:
+Then you create **test_script.py** to test `get_namespaces`:
 
 ```python
 import script
@@ -158,5 +158,9 @@ def test_complex_tool(
 # Conclusion
 
 Python **unittest** module provides a powerful `Mock` object, that allows to mock any function, and the `patch` decorator to be applied to test cases.
+
+Remember that the order of test case arguments must the opposite of the `patch` decorators.
+
+If the mock should return always the same values use the `return_value` property, otherwise use the `side_effect` property to returns different outputs based on the inputs.
 
 To not duplicate the patch decorator to every test case function, it is possible to decorate the test case class directly.
