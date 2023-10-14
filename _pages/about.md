@@ -1,9 +1,9 @@
 ---
 permalink: /about/
-title: "About"
-toc: true
+toc: false
 ---
-# Who I am
+### Hello! I'm
+# Andrea Grillo
 
 I am an engineer with a background in telecommunications, digital signal
 processing, and remote sensing image analysis.
