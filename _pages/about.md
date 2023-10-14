@@ -1,14 +1,15 @@
 ---
 permalink: /about/
+title: Hello! I'm
 toc: false
 ---
-# Hello! I'm Andrea Grillo
+# Andrea Grillo
 I am a passionate developer based in Genoa, where I live, surf and windsurf.
 
 Welcome to my website!
 
 ## Work
-I'm currently working at <a href="https://www.kiratech.it/"><span style="font-weight:500;margin-right:3px;color:#FF7F50">Kiratech</span><img alt="kiratech logo" src="https://media.licdn.com/dms/image/C4D0BAQGunZcU05w6hw/company-logo_200_200/0/1678979885143?e=2147483647&v=beta&t=3NYP3CJFj-wvTWOC0gcLtzXSjqFF5tQNI6aQm2RGDrs"/></a> as a cloud native engineer, designing architectures for cloud environments, provisioning infrastructure as code, and developing on kubernetes clusters. In other words, I'm working with Terraform, Kubernetes, Go and Python.
+I'm currently working at <a href="https://www.kiratech.it/"><span style="font-weight:700;margin-right:3px;color:#FF7F50">Kiratech</span><img alt="kiratech logo" src="/assets/images/work-logo.jpg"/></a> as a cloud native engineer, designing architectures for cloud environments, provisioning infrastructure as code, and developing on kubernetes clusters. In other words, I'm working with Terraform, Kubernetes, Go and Python.
 
 ## Side projects
 Over the last few years, I published many repositories on cloud and kubernetes development.
