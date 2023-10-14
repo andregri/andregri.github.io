@@ -13,3 +13,6 @@ The main steps are:
 - Install bundle webrick `bundle add webrick`
 - Build jekyll site: `bundle exec jekyll build`
 - Build and serve jekyll site [on port 4000](http://localhost:4000): `bundle exec jekyll serve`
+
+## Resources
+- https://www.fabriziomusacchio.com/blog/2021-08-11-Minimal_Mistakes_Cheat_Sheet/
