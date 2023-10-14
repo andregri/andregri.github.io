@@ -107,13 +107,13 @@ author:
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:andrea.grillo96@live.com"
+      # url: "mailto:"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/AndreaGrillo96"
+      # url: "https://twitter.com/"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url: "https://facebook.com/"
@@ -128,7 +128,7 @@ author:
       url: "https://www.linkedin.com/in/andrea-grillo-3b439b1a9/"
     - label: "DevTo"
       icon: "fab fa-fw fa-dev"
-      url: "https://dev.to/andreagrillo96"
+      # url: "https://dev.to/andreagrillo96"
 
 # Site Footer
 footer:
