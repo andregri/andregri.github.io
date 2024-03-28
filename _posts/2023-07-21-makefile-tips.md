@@ -69,7 +69,7 @@ From [“The Two Flavors of Variables” documentation of GNU Make](https://www.
 
 ```makefile
 x := foo
-y := $(x) bar
+y = $(x) bar
 x := later
 
 .PHONY: printx
