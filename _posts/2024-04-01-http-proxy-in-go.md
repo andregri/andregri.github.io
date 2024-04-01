@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Implementing an HTTP proxy in Go
-toc: true
+toc: false
 tags: go
 ---
 
@@ -139,7 +139,9 @@ func transfer(wg *sync.WaitGroup, destination io.Writer, source io.Reader, destN
 }
 ```
 
-Online I found many discussions about closing the connections but after some tests I guess it is important to close them once after that all streams are copied.
+Online I found many discussions (1)[https://stackoverflow.com/questions/75418196/correct-usage-of-io-copy-to-proxy-data-between-two-net-conn-tcp-connections-in-g] (2)[https://stackoverflow.com/questions/32460618/golang-1-5-io-copy-blocked-with-two-tcpconn?rq=4] (3)[https://stackoverflow.com/questions/75418196/correct-usage-of-io-copy-to-proxy-data-between-two-net-conn-tcp-connections-in-g] (4)[https://gist.github.com/jbardin/821d08cb64c01c84b81a] about closing the connections but after some tests I guess it is important to close them once after that all streams are copied.
 The original implementation didn't use the `sync.WaitGroup` to wait for the `Copy` functions to be completed and closed both streamer twice.
 This produced an error during `io.Copy`, though the proxy worked correctly.
 I preferred to defer the close of connection in the parent of `transfer` function to call the `Close` function once.
+
+To watch the complete source code the proxy server, visit my [repository on Github](https://github.com/andregri/go-proxy/tree/6d409b57b3b1ceb40405da46efca104376b1d1dc).
