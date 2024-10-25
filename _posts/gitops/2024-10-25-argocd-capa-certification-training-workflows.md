@@ -251,3 +251,40 @@ STEP          TEMPLATE  PODNAME                        DURATION  MESSAGE
  ├─✔ a        whalesay  dag-szbkr-whalesay-3289441315  6s          
  └─◷ b        whalesay  dag-szbkr-whalesay-3306218934  3s
 ```
+
+## Loops
+
+### withItems
+A DAG allows to loop over a number of items:
+```
+dag:
+  tasks:
+    - name: print-message
+      template: whalesay
+      arguments:
+        parameters:
+          - name: message
+            value: "{{item}}"
+      withItems:
+        - "hello world"
+        - "goodbye world"
+```
+
+The template tag **{{item}}** will be substituted with the values under *withItems*
+
+### withSequence
+To loop over a sequence of numbers:
+```
+dag:
+  tasks:
+    - name: print-message
+      template: whalesay
+      arguments:
+        parameters:
+          - name: message
+            value: "{{item}}"
+      withSequence:
+        count: 5
+```
+The 5 pods run at the same time and the pod name has the sequence number in the name.
+
