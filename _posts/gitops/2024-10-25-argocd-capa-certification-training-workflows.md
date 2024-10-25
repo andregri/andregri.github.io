@@ -205,3 +205,49 @@ template-tag-n58nn:  __________________________
 template-tag-n58nn: < hello template-tag-n58nn >
 ...
 ```
+
+## DAG template
+Is a type of orchestration template:
+```yaml
+cat <<EOF > data-workflow.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: dag-
+spec:
+  entrypoint: main
+  templates:
+    - name: main
+      dag:
+        tasks:
+          - name: a
+            template: whalesay
+          - name: b
+            template: whalesay
+            dependencies:
+              - a
+    - name: whalesay
+      container:
+        image: docker/whalesay
+        command: [ cowsay ]
+        args: [ "hello world" ]
+```
+
+In this example there are 2 templates:
+- *main* that is a DAG template
+- *whalesay* that is a container template
+
+The DAG template has 2 tasks *a* and *b*, but *b* won't run until *a* completes.
+
+Submit the work:
+```
+argo submit --watch dag-workflow.yaml
+```
+
+The output should be similar to:
+```
+STEP          TEMPLATE  PODNAME                        DURATION  MESSAGE
+ ● dag-szbkr  main                                                 
+ ├─✔ a        whalesay  dag-szbkr-whalesay-3289441315  6s          
+ └─◷ b        whalesay  dag-szbkr-whalesay-3306218934  3s
+```
