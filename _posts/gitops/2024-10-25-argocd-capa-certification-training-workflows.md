@@ -1,4 +1,9 @@
-# Argocd CAPA Certification Training: Workflows
+---
+layout: single
+title: Argocd CAPA Certification Training: Workflows
+toc: true
+tags: gitops
+---
 
 Argocd Workflows is an orchestrator of parallel job on Kubernetes.
 
@@ -120,4 +125,77 @@ argo list -n argo @latest
 View the logs of a specific workflow:
 ```
 argo logs -n argo @latest
+```
+
+## Templates
+
+There are 2 categories of templates:
+- work
+- orchestration
+
+The **work** category includes work to be done:
+- container
+- container set
+- data
+- resource
+- script
+
+The **orchestration** category includes:
+- DAG
+- steps
+- suspend
+
+## Container template
+```
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: container-
+spec:
+  entrypoint: main
+  templates:
+  - name: main
+    container:
+      image: docker/whalesay
+      command: [cowsay]
+      args: ["hello world"]
+```
+
+The **template tags** (aka **template variables**) are used to substitute data in the workflow at runtime.
+
+There are global variables, like **workflow.name**.
+
+For example submit this job:
+```
+cat <<EOF > template-tag-workflow.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: template-tag-
+spec:
+  entrypoint: main
+  templates:
+    - name: main
+      container:
+        image: docker/whalesay
+        command: [cowsay]
+        args: ["hello {{workflow.name}}"]
+EOF
+```
+
+Submit the job:
+```
+argo submit --watch template-tag-workflow.yaml
+```
+
+Watch the logs:
+```
+argo logs @latest
+```
+
+And the output shows the random name assigned to the job:
+```
+template-tag-n58nn:  __________________________ 
+template-tag-n58nn: < hello template-tag-n58nn >
+...
 ```
