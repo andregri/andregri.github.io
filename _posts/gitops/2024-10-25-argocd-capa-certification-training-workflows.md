@@ -140,16 +140,18 @@ The **work** category includes work to be done:
 - **resource**: to create a kubernetes resource and wait for it to meet a condition
 - **script**: to run a script in a container
 
-Every template doing work runs a pod.
+Every template doing work runs a **pod**.
 To view these pods, list by using the label:
 ```
 kubectl get pods -l workflows.argoproj.io/workflow
 ```
 
 The **orchestration** category includes:
-- DAG
-- steps
-- suspend
+- DAG: to run tasks in parallel with dependencies
+- steps: to run a sequence of tasks
+- suspend: to suspend a workflow waiting for manual approval or external systems
+
+Orchestration templates don't run pods.
 
 ## Container template
 ```
@@ -288,3 +290,45 @@ dag:
 ```
 The 5 pods run at the same time and the pod name has the sequence number in the name.
 
+### Exit handler
+To perform a task after something has finished, you can use the exit handler using **onExit**.
+It states the name of the template to be run on-exit.
+
+Exit handlers can run at the end of a template:
+```
+dag:
+  tasks:
+    - name: a
+      template: whalesay
+      onExit: tidy-up
+```
+
+Example output:
+```
+STEP                   TEMPLATE  PODNAME                        DURATION  MESSAGE
+ ✔ exit-handler-plvg7  main
+ ├─✔ a                 whalesay  exit-handler-plvg7-1651124468  5s
+ └─✔ a.onExit          tidy-up   exit-handler-plvg7-3635807335  6s
+```
+
+
+Or exit handlers can run at the end of the workflow:
+```
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: exit-handler-
+spec:
+  onExit: tidy-up
+  entrypoint: main
+  templates:
+```
+
+Example output:
+```
+STEP                          TEMPLATE  PODNAME                                 DURATION  MESSAGE
+ ✔ exit-handler-tcr42         main                                                          
+ └─✔ a                        whalesay  exit-handler-tcr42-whalesay-1511575071  8s          
+                                                                                                     
+ ✔ exit-handler-tcr42.onExit  tidy-up   exit-handler-tcr42-tidy-up-723539885    7s
+```
