@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Argocd CAPA Certification Training: Workflows
+title: Argocd CAPA Certification Training - Workflows
 toc: true
 tags: gitops
 ---
