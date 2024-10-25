@@ -130,15 +130,21 @@ argo logs -n argo @latest
 ## Templates
 
 There are 2 categories of templates:
-- work
-- orchestration
+- **work**: that runs a pod
+- **orchestration**
 
 The **work** category includes work to be done:
-- container
-- container set
-- data
-- resource
-- script
+- **container**: to run a container
+- **container set:** to run multiple containers in a single pod so that many containers share the same workspace
+- **data**: to get data from storage
+- **resource**: to create a kubernetes resource and wait for it to meet a condition
+- **script**: to run a script in a container
+
+Every template doing work runs a pod.
+To view these pods, list by using the label:
+```
+kubectl get pods -l workflows.argoproj.io/workflow
+```
 
 The **orchestration** category includes:
 - DAG
